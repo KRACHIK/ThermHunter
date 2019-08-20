@@ -7,19 +7,19 @@ file( GLOB SOURCE_CODE
 	
 	sourse/def.h
 	 
-	sourse/input_output_cleo_prms.h
-	sourse/input_output_cleo_prms.cpp
+	source/input_output_cleo_prms.h
+	source/input_output_cleo_prms.cpp
 	   
-	sourse/core.h
-	sourse/core.cpp
+	source/core.h
+	source/core.cpp
 
-	sourse/BaseDequeObject.h
+	source/BaseDequeObject.h
 	sourse/BaseDequeObject.cpp
 	
-	sourse/ThermDeamon.h
+	source/ThermDeamon.h
 	
-	sourse/MyUtiles.h
-	sourse/MyUtiles.cpp
+	source/MyUtiles.h
+	source/MyUtiles.cpp
 )
 source_group("" FILES ${SOURCE_CODE}) 
   
