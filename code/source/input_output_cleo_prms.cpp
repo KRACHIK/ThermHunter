@@ -63,10 +63,14 @@ extern "C" __declspec(dllexport) void Public_Get_Next_Therm_Baloon(
 	/* Radius */ float* A5
 )
 {
-	Log("[void Public_Get_Next_Therm_Baloon]");
-
-	CEngineSingletonMap::Instance().DbgPrint();
-
+	Log("[void Public_Get_Next_Therm_Baloon] %f %f %f %f %f",
+		*A1,
+		*A2,
+		*A3,
+		*A4,
+		*A5
+		);
+	  
 	CEngineSingletonMap &glMyCLEO_Core = CEngineSingletonMap::Instance();
 	glMyCLEO_Core.Public_Get_Next_Therm_Baloon(
 		A1,
@@ -85,7 +89,12 @@ extern "C" __declspec(dllexport) void Publicl_Is_Self_Pos_In_Thermik(
 	/* Design */OUT float* A4
 )
 { 
-	Log("[Public_Set_Object_Pos] : ");
+	Log("[Publicl_Is_Self_Pos_In_Thermik] : %f %f %F %f"
+		,*A1
+		,*A2
+		,*A3
+		,*A4
+		);
 
 	CEngineSingletonMap &glMyCLEO_Core = CEngineSingletonMap::Instance();
 

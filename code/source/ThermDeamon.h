@@ -19,20 +19,20 @@ public:
 		CDequeObjectContainer<CThermBaloon> _Therm;
 
 		CPoint3D CurPos(0.0, 0.0, 0.0);
-		float	 fRadius = 20.0f;
+		float	 fRadius = 60.0f;
 		float	 fHight = 10.0f;
-		int		 Count = 51;
+		int		 Count = 1;
 
 		CThermBaloon StartBaloon(
-			/* Spawn*/ CPoint3D(1.0, 2.0, 3.0)
+			/* Spawn*/ CPoint3D(0.0, 0.0, 0.0)
 			, CurPos
 			, fRadius
 			, fHight
 			/*temperature*/, 37.0f
 		);
 
-		float  X_Offset = 4 * fRadius + 3.0f;
-		float  Y_Offset = fRadius + 3.0f;
+		float  X_Offset = 0; //fRadius + 3.0f;
+		float  Y_Offset = 0; //fRadius + 3.0f;
 
 		for (int i = 0; i < Count; i++)
 		{
@@ -86,10 +86,14 @@ public:
 		for (size_t i = 0; i < _Therm.Size(); i++)
 		{
 			if (_IsSelfPosInThermik(_Therm.GetObjectIndex(i), ActorPos.GetPos()))
+			{
 				*Design = 1.0f;
 
-			*Design = 0.0f;
+				return;
+			}
 		}
+
+		*Design = 0.0f;
 	}
 
 
@@ -105,6 +109,14 @@ private:
 	{
 		float d = CMath::GetDistance2D(ThermBaloon.GetPos(), ActorPos);
 
+		Log(
+			"[CThermDeamon::_IsSelfPosInThermik] : Distance d=%f, ActorPos: %s, ThermPos %s ThermBaloon.GetRadius=%f"
+			, d
+			, ActorPos.GetDbgStr().c_str()
+			, ThermBaloon.GetPos().GetDbgStr().c_str()
+			, ThermBaloon.GetRadius()
+		);
+
 		if (d <= ThermBaloon.GetRadius())
 		{
 
@@ -114,6 +126,8 @@ private:
 				//&& ActorPos.GetZ() <= ThermBaloon.GetPos().GetZ() + ThermBaloon.GetHight()
 				)
 			{
+				Log("[CThermDeamon::_IsSelfPosInThermik] : return ok");
+
 				return true;
 			}
 		}

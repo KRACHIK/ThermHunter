@@ -105,6 +105,12 @@ public:
 	float GetZ() const { return m_Z; }
 
 
+	std::string GetDbgStr() const
+	{
+		std::string Log = "[" + std::to_string(m_X) + "," + std::to_string(m_Y) + "," + std::to_string(m_Z) + "]";
+		return Log;
+	}
+
 private:
 	float m_X = 0.0f;
 	float m_Y = 0.0f;
@@ -116,25 +122,53 @@ private:
 class CMath
 {
 public:
-	static float GetDistance(CPoint3D Point1, CPoint3D Point2)
+	/*static float GetDistance(CPoint3D A, CPoint3D B)
 	{
 		float  Distance =
-			sqrt(pow((Point1.GetX() - Point2.GetX()), 2.0))
-			+ sqrt(pow((Point1.GetY() - Point2.GetY()), 2.0))
-			+ sqrt(pow((Point1.GetZ() - Point2.GetZ()), 2.0));
+			sqrt(pow((A.GetX() - B.GetX()), 2.0))
+			+ sqrt(pow((A.GetY() - B.GetY()), 2.0))
+			+ sqrt(pow((A.GetZ() - B.GetZ()), 2.0));
 
 		return Distance;
-	}
+	}*/
 
-	static float GetDistance2D(CPoint3D Point1, CPoint3D Point2)
+	static float GetDistance2D(CPoint3D A, CPoint3D B)
 	{
-		float  Distance = sqrt(
-			pow((Point1.GetX() - Point2.GetX()), 2.0)
-			+ pow((Point1.GetY() - Point2.GetY()), 2.0)
+		float Ax_sqare = A.GetX() * A.GetX();
+		float Bx_sqare = B.GetX() * B.GetX();
+
+		float Ay_sqare = A.GetY() * A.GetY();
+		float By_sqare = B.GetY() * B.GetY();
+
+		float x_dif = abs(Ax_sqare - Bx_sqare);
+		float y_dif = abs(Ay_sqare - By_sqare);
+
+		float sum= x_dif + y_dif; 
+
+		float  fDistance = sqrt(sum);
+		 
+		Log("[CMath::GetDistance2D] Ax_sqare %f, Bx_sqare %f, Ay_sqare %f, By_sqare	%f, x_dif %f, y_dif %f, sum %f, fDistance %f "
+			, Ax_sqare
+			, Bx_sqare
+			, Ay_sqare
+			, By_sqare
+			, x_dif
+			, y_dif
+			, sum
+			, fDistance
 		);
 
-		return Distance;
+
+			float  Distance = sqrt(
+			(A.GetX()*A.GetX()) - (B.GetX()*B.GetX())
+				+
+				(A.GetY()*A.GetY()) - (B.GetY()*B.GetY())
+			);
+
+
+		return fDistance;
 	}
+
 
 };
 
