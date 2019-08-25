@@ -143,11 +143,11 @@ public:
 		float x_dif = abs(Ax_sqare - Bx_sqare);
 		float y_dif = abs(Ay_sqare - By_sqare);
 
-		float sum= x_dif + y_dif; 
+		float sum = x_dif + y_dif;
 
 		float  fDistance = sqrt(sum);
-		 
-		Log("[CMath::GetDistance2D] Ax_sqare %f, Bx_sqare %f, Ay_sqare %f, By_sqare	%f, x_dif %f, y_dif %f, sum %f, fDistance %f "
+
+		/*Log("[CMath::GetDistance2D] Ax_sqare %f, Bx_sqare %f, Ay_sqare %f, By_sqare	%f, x_dif %f, y_dif %f, sum %f, fDistance %f "
 			, Ax_sqare
 			, Bx_sqare
 			, Ay_sqare
@@ -156,19 +156,60 @@ public:
 			, y_dif
 			, sum
 			, fDistance
-		);
-
-
-			float  Distance = sqrt(
-			(A.GetX()*A.GetX()) - (B.GetX()*B.GetX())
-				+
-				(A.GetY()*A.GetY()) - (B.GetY()*B.GetY())
-			);
+		);*/
 
 
 		return fDistance;
 	}
 
+
+	static float GetDistance2DNew(CPoint3D A, CPoint3D B)
+	{
+		float   fDistance = sqrt(
+			pow(A.GetX() - B.GetX(), 2) + pow(A.GetY() - B.GetY(), 2)
+		);
+		return fDistance;
+	}
+
+
+	static float IsInCircle(CPoint3D A, CPoint3D B, float fRadius)
+	{
+		CPoint3D PosA = FixZeroDecard(A);
+		CPoint3D PosB = FixZeroDecard(B);
+
+		if (
+			fRadius*fRadius <=
+			(PosA.GetX()*PosA.GetX()) - (PosB.GetX()*PosB.GetX()) + (PosA.GetY()*PosA.GetY()) - (PosB.GetY()*PosB.GetY())
+			)
+		{
+			return true;
+		}
+
+		return false;
+	}
+
+
+	static float FixDecarCord(const float Value)
+	{
+		if (
+			Value >= 0.0f && Value <= 1.0f
+			)
+		{
+			Log("[CMath::FixDecarCord] : Fix!!! ATTENTION :) ");
+			return 1.0f;
+		}
+
+		return Value;
+	}
+
+	static CPoint3D  FixZeroDecard(const CPoint3D &Point)
+	{
+		float x = FixDecarCord(Point.GetX());
+		float y = FixDecarCord(Point.GetY());
+		float z = FixDecarCord(Point.GetZ());
+
+		return CPoint3D(x, y, z);
+	}
 
 };
 
