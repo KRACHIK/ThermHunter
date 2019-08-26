@@ -1,4 +1,2 @@
 ﻿#include "core.h"
- 
-//  *.cpp  
- 
+

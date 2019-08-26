@@ -25,16 +25,13 @@ void Init_UDP_Client()
 
 	}
 }
-
-
+ 
 extern "C" __declspec(dllexport) void  Public_Exit_DLL()
 {
 	Log("[Public_Exit_DLL] : ");
 	CEngineSingletonMap::Instance().Exit_DLL();
 }
-
-
-
+  
 extern "C" __declspec(dllexport) void DLL_PLUS()   // CALL :A007 
 {
 	CEngineSingletonMap::Instance().DbgPrint();
@@ -50,6 +47,8 @@ extern "C" __declspec(dllexport) void Init_Client_backgraund_Thr() // Sanny Buil
 	CEngineSingletonMap &glMyCLEO_Core = CEngineSingletonMap::Instance();
 	glMyCLEO_Core.DbgPrint();
 
+	glMyCLEO_Core.IsFirstStartCreateINI();
+	 
 	std::thread t1(Init_UDP_Client);
 	t1.detach();
 }
@@ -101,43 +100,7 @@ extern "C" __declspec(dllexport) void Publicl_Is_Self_Pos_In_Thermik(
 	glMyCLEO_Core.Public_Set_Object_Pos(A1, A2, A3, A4);
 }
 
-
-
-
-
-
-#if 0
-extern "C" __declspec(dllexport) void Public_InPutDimByCLEO(
-	float* A1,
-	int iPrms1, int iPrms2,
-	float* A2, float* A3, float* A4, float* A5, float* A6, float* A7, float* A8, float* A9, float* A10)
-{
-}
-
-extern "C" __declspec(dllexport) void Public_OUTPUT_DimByCLEO(
-	float* A1, float* A2, float* A3, float* A4, float* A5,
-	float* A6, float* A7, float* A8, float* A9, float* A10)
-{
-	// read stack Box package
-	*A1 = 0; *A2 = 0; *A3 = 0; *A4 = 0; *A5 = 0;
-	*A6 = 0; *A7 = 0; *A8 = 0; *A9 = 0; *A10 = 0;
-
-
-	Log(" ");
-	Log("[extern void Public_OUTPUT_DimByCLEO] 1=%f", *A1);
-	Log("[extern void Public_OUTPUT_DimByCLEO] 2=%f", *A2);
-	Log("[extern void Public_OUTPUT_DimByCLEO] 3=%f", *A3);
-	Log("[extern void Public_OUTPUT_DimByCLEO] 4=%f", *A4);
-	Log("[extern void Public_OUTPUT_DimByCLEO] 5=%f", *A5);
-	Log("[extern void Public_OUTPUT_DimByCLEO] 6=%f", *A6);
-	Log("[extern void Public_OUTPUT_DimByCLEO] 7=%f", *A7);
-	Log("[extern void Public_OUTPUT_DimByCLEO] 8=%f", *A8);
-	Log("[extern void Public_OUTPUT_DimByCLEO] 9=%f", *A9);
-	Log("[extern void Public_OUTPUT_DimByCLEO] 10=%f", *A10);
-}
-
-#endif  
-
+ 
 
 
 
